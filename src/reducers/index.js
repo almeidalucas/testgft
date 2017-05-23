@@ -1,5 +1,5 @@
-import tableData from './reducer.tableData';
+import tableData from './reducer.tableData'
 
 export {
-    tableData
-};
+	tableData,
+}
