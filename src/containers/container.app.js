@@ -10,8 +10,6 @@ import {
 	GET_TABLEDATA,
 } from '../actions/actions.tableData'
 
-let searchFields = {}
-
 class App extends Component {
 
 	constructor(props) {
@@ -29,7 +27,7 @@ class App extends Component {
 	_searchByFields() {
 		const autoCompleteInputs = document.getElementsByClassName('autoCompleteInput')
 
-		searchFields = {
+		this.props.fetchSearchByFields({
 			date: autoCompleteInputs[0].children[1].value,
 			deliveryCountry: autoCompleteInputs[1].children[1].value,
 			manufacturer: autoCompleteInputs[2].children[1].value,
@@ -38,9 +36,7 @@ class App extends Component {
 			colour: autoCompleteInputs[5].children[1].value,
 			style: autoCompleteInputs[6].children[1].value,
 			count: autoCompleteInputs[7].children[1].value,
-		}
-
-		this.props.fetchSearchByFields()
+		})
 	}
 
 	render() {
@@ -61,7 +57,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-	return { fetchInitial: () => dispatch(fetchTableData()), fetchSearchByFields: () => dispatch(fetchSearchByFields(searchFields)) }
+	return { fetchInitial: () => dispatch(fetchTableData()), fetchSearchByFields: (searchFields) => dispatch(fetchSearchByFields(searchFields)) }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
